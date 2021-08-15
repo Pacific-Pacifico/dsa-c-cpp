@@ -6,12 +6,13 @@ class Fibonacci
     int n1,n2,n3;
 
     public:
-        Fibonacci(int num)
+        Fibonacci()
         {
             n1=0;
             n2=1;
         }
 
+        //using recursion
         void fib(int n)
         {
             if (n>0)
@@ -30,7 +31,7 @@ int main()
     int num;
     cout<<"Enter a positive integer=";
     cin>>num;
-    Fibonacci obj=Fibonacci(num);
+    Fibonacci obj=Fibonacci();
     cout<<"0, 1, ";
     obj.fib(num-2);
     return 0;
