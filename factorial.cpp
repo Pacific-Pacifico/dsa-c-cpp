@@ -33,8 +33,9 @@ int main()
     if (num<0)
     {
         cout<<"Error: integer cannot be negative"<<endl;
-        return 0;
+        return -1;
     }
     Factorial obj=Factorial(num);
     cout<<"\nFactorial="<<obj.get_factorial()<<endl;
+    return 0;
 }
