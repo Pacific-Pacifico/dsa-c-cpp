@@ -15,6 +15,12 @@ class Fibonacci
 
         void fib()
         {
+            if(n==1)
+            {
+                cout<<n1<<","<<endl;
+                return;
+            }
+            cout<<n1<<", "<<n2<<", ";
             for(int i=1;i<=n-2;i++)
             {
                 n3=n1+n2;
@@ -28,10 +34,14 @@ class Fibonacci
 int main()
 {
     int num;
-    cout<<"Enter a positive integer=";
+    cout<<"Enter number of elements=";
     cin>>num;
+    if(num<1)
+    {
+        cout<<"number cannot be negative or zero"<<endl;
+        return -1;
+    }
     Fibonacci obj=Fibonacci(num);
-    cout<<"0, 1, ";
     obj.fib();
     cout<<endl;
     return 0;

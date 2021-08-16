@@ -29,9 +29,19 @@ class Fibonacci
 int main()
 {
     int num;
-    cout<<"Enter a positive integer=";
+    cout<<"Enter number of elements=";
     cin>>num;
+    if(num<1)
+    {
+        cout<<"number cannot be negative or zero"<<endl;
+        return -1;
+    }
     Fibonacci obj=Fibonacci();
+    if (num==1)
+    {
+        cout<<"0,"<<endl;
+        return 0;
+    }
     cout<<"0, 1, ";
     obj.fib(num-2);
     cout<<endl;
