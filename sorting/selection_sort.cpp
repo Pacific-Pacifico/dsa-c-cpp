@@ -84,4 +84,5 @@ int main()
     selection_sort_descending(arr,n);
     cout<<"Sorted Array(descending): ";
     show(arr,n);
+    return 0;
 }

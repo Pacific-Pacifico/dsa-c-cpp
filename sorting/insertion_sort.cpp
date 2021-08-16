@@ -54,4 +54,5 @@ int main()
     insertion_sort(arr,n);
     cout<<"Sorted Array: ";
     show(arr,n);
+    return 0;
 }
