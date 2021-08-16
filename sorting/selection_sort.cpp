@@ -1,6 +1,8 @@
+// selection sort 
 #include<iostream>
 using namespace std;
 
+// for sorting in ascending order
 void selection_sort(int arr[],int n)
 {
     int min;
@@ -9,21 +11,45 @@ void selection_sort(int arr[],int n)
         min=i;
         for(int j=i+1;j<n;j++)
         {
-            if(arr[j]<arr[min])
+            if(arr[j]<arr[min])    
             {
                 min=j;
             }
         }
-        swap(arr[i],arr[min]);
+        if(i!=min)
+        {
+            swap(arr[i],arr[min]);
+        }
+    }
+}
+
+// for sorting in descending order
+void selection_sort_descending(int arr[],int n)
+{
+    int max;
+    for(int i=0;i<n-1;i++)
+    {
+        max=i;
+        for(int j=i+1;j<n;j++)
+        {
+            if(arr[j]>arr[max])    
+            {
+                max=j;
+            }
+        }
+        if(i!=max)
+        {
+            swap(arr[i],arr[max]);
+        }
     }
 }
 
 void swap(int &a,int &b)
 {
-    int c;
-    c=a;
+    int temp;
+    temp=a;
     a=b;
-    b=c;
+    b=temp;
 }
 
 void show(int arr[],int n)
@@ -48,7 +74,14 @@ int main()
     }
     cout<<"Array: ";
     show(arr,n);
+
+    //for ascending
     selection_sort(arr,n);
-    cout<<"Sorted Array: ";
+    cout<<"Sorted Array(ascending): ";
+    show(arr,n);
+
+    // for descending
+    selection_sort_descending(arr,n);
+    cout<<"Sorted Array(descending): ";
     show(arr,n);
 }
