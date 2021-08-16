@@ -3,25 +3,24 @@ using namespace std;
 
 class Fibonacci
 {
-    int n1,n2,n3;
+    int n,n1,n2,n3;
 
     public:
-        Fibonacci()
+        Fibonacci(int n)
         {
+            this->n=n;
             n1=0;
             n2=1;
         }
 
-        //using recursion
-        void fib(int n)
+        void fib()
         {
-            if (n>0)
+            for(int i=1;i<=n-2;i++)
             {
                 n3=n1+n2;
                 cout<<n3<<", ";
                 n1=n2;
                 n2=n3;
-                fib(n-1);
             }
         }
 };
@@ -31,9 +30,9 @@ int main()
     int num;
     cout<<"Enter a positive integer=";
     cin>>num;
-    Fibonacci obj=Fibonacci();
+    Fibonacci obj=Fibonacci(num);
     cout<<"0, 1, ";
-    obj.fib(num-2);
+    obj.fib();
     cout<<endl;
     return 0;
 }
