@@ -49,4 +49,5 @@ int main()
     Rectangle r3=r1+r2;  //operator function called here
     cout<<"Dimensions of third rectangle:"<<endl;
     r3.show();
+    return 0;
 }
