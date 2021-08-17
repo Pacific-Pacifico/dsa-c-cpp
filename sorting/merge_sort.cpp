@@ -3,6 +3,14 @@
 #include<iostream>
 using namespace std;
 
+void swap(int &a,int &b)
+{
+    int temp;
+    temp=a;
+    a=b;
+    b=temp;
+}
+
 void merge(int arr[],int lb,int mid,int ub)
 {
     int i,j,k,a[ub+1];
@@ -75,9 +83,7 @@ void show(int arr[],int n)
 
 int main()
 {
-    int n;
-    cout<<"Enter size of array=";
-    cin>>n;
+    const int n=5;
     int arr[n];
     for(int i=0;i<n;i++)
     {

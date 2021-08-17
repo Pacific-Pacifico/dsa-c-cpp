@@ -3,6 +3,14 @@
 #include<iostream>
 using namespace std;
 
+void swap(int &a,int &b)
+{
+    int temp;
+    temp=a;
+    a=b;
+    b=temp;
+}
+
 void insertion_sort(int arr[],int n)
 {
     int temp,i,j;
@@ -19,15 +27,6 @@ void insertion_sort(int arr[],int n)
     }
 }
 
-
-void swap(int &a,int &b)
-{
-    int temp;
-    temp=a;
-    a=b;
-    b=temp;
-}
-
 void show(int arr[],int n)
 {
     for(int i=0;i<n;i++)
@@ -39,9 +38,7 @@ void show(int arr[],int n)
 
 int main()
 {
-    int n;
-    cout<<"Enter size of array=";
-    cin>>n;
+    const int n=5;
     int arr[n];
     for(int i=0;i<n;i++)
     {

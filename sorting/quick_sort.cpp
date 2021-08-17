@@ -3,6 +3,14 @@
 #include<iostream>
 using namespace std;
 
+void swap(int &a,int &b)
+{
+    int temp;
+    temp=a;
+    a=b;
+    b=temp;
+}
+
 int partition(int arr[],int lb,int ub)
 {
    int pivot=arr[lb];
@@ -37,15 +45,6 @@ void quick_sort(int arr[],int lb,int ub)
     }
 }
 
-
-void swap(int &a,int &b)
-{
-    int temp;
-    temp=a;
-    a=b;
-    b=temp;
-}
-
 void show(int arr[],int n)
 {
     for(int i=0;i<n;i++)
@@ -57,9 +56,7 @@ void show(int arr[],int n)
 
 int main()
 {
-    int n;
-    cout<<"Enter size of array=";
-    cin>>n;
+    const int n=5;
     int arr[n];
     for(int i=0;i<n;i++)
     {

@@ -33,9 +33,8 @@ void show(int arr[],int n)
 
 int main()
 {
-    int n,ser;
-    cout<<"Enter size of array=";
-    cin>>n;
+    const int n=5;
+    int ser;
     int arr[n];
     for(int i=0;i<n;i++)
     {
