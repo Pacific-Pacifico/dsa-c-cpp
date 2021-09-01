@@ -89,10 +89,59 @@ node *create_list(node *start)
     return start;
 }
 
+node *insert_after(node *start,int data,int n)
+{
+    node *temp,*p=start;
+    while(p!=NULL)
+    {
+        if(p->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p->next;
+            p->next=temp;
+            return start;
+        }
+        p=p->next;
+    }
+    return start;
+}
+
+node *insert_before(node *start,int data,int n)
+{
+    node *temp,*p=start;
+    if(start==NULL)
+    {
+        cout<<"List is empty"<<endl;
+        return start;
+    }
+    if(start->info==n)
+    {
+        temp=new node;
+        temp->info=data;
+        temp->next=start;
+        start=temp;
+        return start;
+    }
+    while(p->next!=NULL)
+    {
+        if(p->next->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p->next;
+            p->next=temp;
+            return start;
+        }   
+        p=p->next;
+    }    
+    return start;
+}
+
 int main()
 {
     node *start=NULL;
-    int option,data;
+    int option,data,n;
     char ch;
     do
     {
@@ -149,12 +198,23 @@ int main()
                 break;
 
             case 7:
+                cout<<"Enter data=";
+                cin>>data;
+                cout<<"Enter data after which you want to insert=";
+                cin>>n;
+                start=insert_after(start,data,n);
                 break;
             
             case 8:
+                cout<<"Enter data=";
+                cin>>data;
+                cout<<"Enter data before which you want to insert=";
+                cin>>n;
+                start=insert_before(start,data,n);
                 break;
             
             case 9:
+
                 break;
             
             case 10:
