@@ -1,8 +1,55 @@
 #include<iostream>
 using namespace std;
 
+struct node 
+{
+    int info;
+    node *next;
+};
+
+void display(node *start)
+{
+    if(start==NULL)
+    {
+        cout<<"List is empty!!"<<endl;
+        return;
+    }
+    node *p=start;
+    cout<<"List: ";
+    while(p!=NULL)
+    {
+        cout<<p->info<<" ";
+        p=p->next;
+    }
+}
+
+int count(node *start)
+{
+    node *p=start;
+    int c=0;
+    while(p!=NULL)
+    {
+        c++;
+    }
+    return c;
+}
+
+int search(node *start,int ser)
+{
+    node *p=start;
+    int pos=-1;
+    while(p!=NULL)
+    {
+        pos++;
+        if(p->info==ser)
+            return pos;
+    }
+    return pos;
+}
+
 int main()
 {
+    node *start=NULL;
     int option;
     while(1)
     {
@@ -27,12 +74,22 @@ int main()
                 break;
             
             case 2:
+                display(start);
                 break;
 
             case 3:
+                cout<<"Number of elements="<<count(start)<<endl;
                 break;
 
             case 4:
+                int ser,pos;
+                cout<<"Enter element to search=";
+                cin>>ser;
+                pos=search(start,ser);
+                if(pos==-1)
+                    cout<<"Notfound!!!"<<endl;
+                else
+                    cout<<"fount at position="<<pos+1<<endl;
                 break;
             
             case 5:
