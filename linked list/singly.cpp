@@ -139,11 +139,38 @@ node *insert_before(node *start,int data,int n)
 
 node *insert_pos(node *start,int data,int pos)
 {
+    
     return start;
 }
 
 node *delete_node(node *start,int data)
 {
+    node *temp,*p;
+    if(start==NULL)
+    {
+        cout<<"List is empty!!!"<<endl;
+        return start; 
+    }
+    if(start->info==data)
+    {
+        temp=start;
+        start=start->next;
+        delete temp;
+        return start;
+    }
+    p=start;
+    while(p->next!=NULL)
+    {
+        if(p->next->info==data)
+        {
+            temp=p->next;
+            p->next=temp->next;
+            delete temp;
+            return start;
+        }
+        p=p->next;
+    }
+    cout<<"Element "<<data<<" not found!"<<endl;
     return start;
 }
 
