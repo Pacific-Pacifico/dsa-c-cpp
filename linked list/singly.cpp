@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cstdlib>
 using namespace std;
 
 struct node 
@@ -47,11 +48,50 @@ int search(node *start,int ser)
     return pos;
 }
 
+node *insert_beg(node *start,int data)
+{
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    temp->next=start;
+    start=temp;
+    return start;
+}
+
+node *insert_end(node *start,int data)
+{
+    node *temp,*p=start;
+    temp=new node;
+    temp->info=data;
+    temp->next=NULL;
+    while(p->next!=NULL)
+        p=p->next;
+    p->next=temp;
+    return start;
+}
+
+node *create_list(node *start)
+{
+    int num,data;
+    cout<<"Enter number of nodes=";
+    cin>>num;
+    cout<<"Enter data for node 1= ";
+    cin>>data;
+    start=insert_beg(start,data);
+    for(int i=2;i<=num;i++)
+    {
+        cout<<"Enter data for node "<<i<<"= ";
+        cin>>data;
+        start=insert_end(start,data);
+    }
+    return start;
+}
+
 int main()
 {
     node *start=NULL;
-    int option;
-    while(1)
+    int option,data,ch;
+    do
     {
         cout<<"Singly linked list"<<endl;
         cout<<"1.create a list"<<endl;
@@ -71,6 +111,7 @@ int main()
         switch(option)
         {
             case 1:
+                start=create_list(start);
                 break;
             
             case 2:
@@ -89,13 +130,19 @@ int main()
                 if(pos==-1)
                     cout<<"Notfound!!!"<<endl;
                 else
-                    cout<<"fount at position="<<pos+1<<endl;
+                    cout<<"found at position="<<pos+1<<endl;
                 break;
             
             case 5:
+                cout<<"Enter data=";
+                cin>>data;
+                start=insert_beg(start,data);
                 break;
 
             case 6:
+                cout<<"Enter data=";
+                cin>>data;
+                start=insert_end(start,data);
                 break;
 
             case 7:
@@ -119,6 +166,8 @@ int main()
             default:
                 cout<<"invalid option"<<endl;
         }
-    }
+        cout<<"Press y/Y and enter to continue.."<<endl;
+        ch=getchar();
+    }while(ch=='y' || ch=='Y');
     return 0;
 }
