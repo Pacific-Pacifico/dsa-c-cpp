@@ -31,6 +31,7 @@ int count(node *start)
     while(p!=NULL)
     {
         c++;
+        p=p->next;
     }
     return c;
 }
@@ -44,8 +45,9 @@ int search(node *start,int ser)
         pos++;
         if(p->info==ser)
             return pos;
+        p=p->next;
     }
-    return pos;
+    return -1;
 }
 
 node *insert_beg(node *start,int data)
@@ -90,7 +92,8 @@ node *create_list(node *start)
 int main()
 {
     node *start=NULL;
-    int option,data,ch;
+    int option,data;
+    char ch;
     do
     {
         cout<<"Singly linked list"<<endl;
@@ -166,8 +169,8 @@ int main()
             default:
                 cout<<"invalid option"<<endl;
         }
-        cout<<"Press y/Y and enter to continue.."<<endl;
-        ch=getchar();
+        cout<<"\nPress y/Y and enter to continue.."<<endl;
+        cin>>ch;
     }while(ch=='y' || ch=='Y');
     return 0;
 }
