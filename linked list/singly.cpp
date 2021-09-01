@@ -1,5 +1,4 @@
 #include<iostream>
-#include<cstdlib>
 using namespace std;
 
 struct node 
@@ -138,6 +137,21 @@ node *insert_before(node *start,int data,int n)
     return start;
 }
 
+node *insert_pos(node *start,int data,int pos)
+{
+    return start;
+}
+
+node *delete_node(node *start,int data)
+{
+    return start;
+}
+
+node *reverse(node *start)
+{
+    return start;
+}
+
 int main()
 {
     node *start=NULL;
@@ -180,7 +194,7 @@ int main()
                 cin>>ser;
                 pos=search(start,ser);
                 if(pos==-1)
-                    cout<<"Notfound!!!"<<endl;
+                    cout<<"Not found!!!"<<endl;
                 else
                     cout<<"found at position="<<pos+1<<endl;
                 break;
@@ -214,13 +228,21 @@ int main()
                 break;
             
             case 9:
-
+                cout<<"Enter data=";
+                cin>>data;
+                cout<<"Enter position=";
+                cin>>n;
+                start=insert_pos(start,data,n);
                 break;
             
             case 10:
+                cout<<"Enter element to be deleted=";
+                cin>>data;
+                start=delete_node(start,data);
                 break;
             
             case 11:
+                start=reverse(start);
                 break;
             
             case 12:
