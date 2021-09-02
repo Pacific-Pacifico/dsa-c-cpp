@@ -139,7 +139,36 @@ node *insert_before(node *start,int data,int n)
 
 node *insert_pos(node *start,int data,int pos)
 {
-    
+    node *temp,*p;
+    if(pos<=0)
+    {
+        cout<<"Position cannot be zero or negative";
+        return start;
+    }
+    temp=new node;
+    temp->info=data;
+    if(pos==1)
+    {
+        temp->next=start;
+        start=temp;
+        return start;
+    }
+    int c=1;
+    p=start;
+    while(p!=NULL && c<pos-1)
+    {
+        p=p->next;
+        c++;
+    }
+    if(p==NULL)
+    {
+        cout<<"Position not found!!!"<<endl;
+    }
+    else
+    {
+        temp->next=p->next;
+        p->next=temp;
+    }
     return start;
 }
 
@@ -176,6 +205,7 @@ node *delete_node(node *start,int data)
 
 node *reverse(node *start)
 {
+    
     return start;
 }
 
