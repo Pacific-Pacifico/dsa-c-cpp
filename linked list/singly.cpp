@@ -205,7 +205,22 @@ node *delete_node(node *start,int data)
 
 node *reverse(node *start)
 {
-    
+    node *prev,*next,*p;
+    if(start==NULL)
+    {
+        cout<<"No elements in list"<<endl;
+        return start;
+    }
+    prev=NULL;
+    p=start;
+    while(p!=NULL)
+    {
+        next=p->next;
+        p->next=prev;
+        prev=p;
+        p=next;
+    }
+    start=prev;
     return start;
 }
 
