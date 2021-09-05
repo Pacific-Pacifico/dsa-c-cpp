@@ -52,16 +52,45 @@ int search(node *start,int ser)
 
 node *insert_empty(node *start,int data)
 {
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    temp->prev=NULL;
+    temp->next=NULL;
+    start=temp;
     return start;
 }
 
 node *insert_beg(node *start,int data)
 {
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    temp->prev=NULL;
+    temp->next=start;
+    start->prev=temp;
+    start=temp;
     return start;
 }
 
 node *insert_end(node *start,int data)
 {
+    node *temp,*p;
+    if(start==NULL)
+    {
+        cout<<"Empty List"<<endl;
+        return start;
+    }
+    p=start;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    temp=new node;
+    temp->info=data;
+    temp->prev=p;
+    temp->next=NULL;
+    p->next=temp;
     return start;
 }
 
@@ -72,7 +101,7 @@ node *create_list(node *start)
     cin>>num;
     cout<<"Enter data for node 1= ";
     cin>>data;
-    start=insert_beg(start,data);
+    start=insert_empty(start,data);
     for(int i=2;i<=num;i++)
     {
         cout<<"Enter data for node "<<i<<"= ";
