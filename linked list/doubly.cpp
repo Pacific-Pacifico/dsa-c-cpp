@@ -113,16 +113,109 @@ node *create_list(node *start)
 
 node *insert_after(node *start,int data,int n)
 {
+    node *temp,*p;
+    if(start==NULL)
+    {
+        cout<<"Empty list"<<endl;
+        return start;
+    }
+    p=start;
+    while(p!=NULL)
+    {
+        if(p->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p->next;
+            temp->prev=p;
+            if(p->next!=NULL)
+                p->next->prev=temp;
+            p->next=temp;
+            return start;
+        }
+        p=p->next;
+    }
+    cout<<n<<" not present in list"<<endl;
     return start;
 }
 
 node *insert_before(node *start,int data,int n)
-{    
+{
+    node *temp,*p;
+    if(start==NULL)
+    {
+        cout<<"Empty list"<<endl;
+        return start;
+    }
+    if(start->info==n)
+    {
+        temp=new node;
+        temp->info=data;
+        temp->next=start;
+        temp->prev=NULL;
+        start->prev=temp;
+        start=temp;
+        return start;
+    }
+    p=start;
+    while(p!=NULL)
+    {
+        if(p->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p;
+            temp->prev=p->prev;
+            p->prev->next=temp;
+            p->prev=temp;
+            return start;
+        }
+        p=p->next;
+    }
+    cout<<n<<" not present in list"<<endl;
     return start;
 }
 
 node *insert_pos(node *start,int data,int pos)
 {
+    node *temp,*p;
+    if(pos<=0)
+    {
+        cout<<"Position cannot be zero or negative";
+        return start;
+    }
+    if(pos==1)
+    {
+        temp=new node;
+        temp->info=data;
+        temp->next=start;
+        temp->prev=NULL;
+        if(start!=NULL)
+            start->prev=temp;
+        start=temp;
+        return start;
+    }
+    int c=1;
+    p=start;
+    while(p!=NULL && c<pos-1)
+    {
+        p=p->next;
+        c++;
+    }
+    if(p==NULL)
+    {
+        cout<<"Position not found!!!"<<endl;
+    }
+    else
+    {
+        temp=new node;
+        temp->info=data;
+        temp->next=p->next;
+        temp->prev=p;
+        if(p->next!=NULL)
+            p->next->prev=temp;
+        p->next=temp;
+    }
     return start;
 }
 
