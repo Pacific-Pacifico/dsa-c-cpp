@@ -221,6 +221,54 @@ node *insert_pos(node *start,int data,int pos)
 
 node *delete_node(node *start,int data)
 {
+    node *temp;
+    if(start==NULL)
+    {
+        cout<<"Empty list"<<endl;
+        return start;
+    }
+    if(start->next==NULL)
+    {
+        if(start->info==data)
+        {
+            temp=start;
+            start=NULL;
+            delete temp;
+            return start;
+        }
+        else
+        {
+            cout<<"Element "<<data<<" not found"<<endl;
+            return start;
+        }
+    }
+    if(start->info==data)
+    {
+        temp=start;
+        start=start->next;
+        start->prev=NULL;
+        delete temp;
+        return start;
+    }
+    temp=start->next;
+    while(temp->next!=NULL)
+    {
+        if(temp->info==data)
+        {
+            temp->prev->next=temp->next;
+            temp->next->prev=temp->prev;
+            delete temp;
+            return start;
+        }
+        temp=temp->next;
+    }
+    if(temp->info==data)
+    {
+        temp->prev->next=NULL;
+        delete temp;
+        return start;
+    }
+    cout<<"Element "<<data<<" not found"<<endl;
     return start;
 }
 
