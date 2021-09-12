@@ -8,108 +8,128 @@ struct node
     node *next;
 };
 
-void display(node *start)
+void display(node *last)
 {
-    if(start==NULL)
+    if(last==NULL)
     {
         cout<<"List is empty!!"<<endl;
         return;
     }
-    node *p=start;
     cout<<"List: ";
-    while(p!=NULL)
+    node *p=last->next;
+    do
     {
         cout<<p->info<<" ";
         p=p->next;
-    }
+    } while (p!=last->next);
+    cout<<endl;
 }
 
-int count(node *start)
+int count(node *last)
 {
-    node *p=start;
+    node *p=NULL;
     int c=0;
-    while(p!=NULL)
+    if(last==NULL)
+        return 0;
+    p=last->next;
+    do
     {
         c++;
         p=p->next;
-    }
+    }while(p!=last->next);
     return c;
 }
 
-int search(node *start,int ser)
+int search(node *last,int ser)
 {
-    node *p=start;
+    node *p=last->next;
     int pos=-1;
-    while(p!=NULL)
+    do
     {
         pos++;
         if(p->info==ser)
             return pos;
         p=p->next;
-    }
+    }while(p!=last->next);
     return -1;
 }
 
-node *insert_empty(node *start,int data)
+node *insert_empty(node *last,int data)
 {
-    return start;
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    last=temp;
+    last->next=last;
+    return last;
 }
 
-node *insert_beg(node *start,int data)
+node *insert_beg(node *last,int data)
 {
-    return start;
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    temp->next=last->next;
+    last->next=temp;
+    return last;
 }
 
-node *insert_end(node *start,int data)
+node *insert_end(node *last,int data)
 {
-    return start;
+    node *temp;
+    temp=new node;
+    temp->info=data;
+    temp->next=last->next;
+    last->next=temp;
+    last=temp;
+    return last;
 }
 
-node *create_list(node *start)
+node *create_list(node *last)
 {
     int num,data;
     cout<<"Enter number of nodes=";
     cin>>num;
     cout<<"Enter data for node 1= ";
     cin>>data;
-    start=insert_beg(start,data);
+    last=insert_empty(last,data);
     for(int i=2;i<=num;i++)
     {
         cout<<"Enter data for node "<<i<<"= ";
         cin>>data;
-        start=insert_end(start,data);
+        last=insert_end(last,data);
     }
-    return start;
+    return last;
 }
 
-node *insert_after(node *start,int data,int n)
+node *insert_after(node *last,int data,int n)
 {
-    return start;
+    return last;
 }
 
-node *insert_before(node *start,int data,int n)
+node *insert_before(node *last,int data,int n)
 {    
-    return start;
+    return last;
 }
 
-node *insert_pos(node *start,int data,int pos)
+node *insert_pos(node *last,int data,int pos)
 {
-    return start;
+    return last;
 }
 
-node *delete_node(node *start,int data)
+node *delete_node(node *last,int data)
 {
-    return start;
+    return last;
 }
 
-node *reverse(node *start)
+node *reverse(node *last)
 {
-    return start;
+    return last;
 }
 
 int main()
 {
-    node *start=NULL;
+    node *last=NULL;
     int option,data,n;
     char ch;
     do
@@ -133,22 +153,22 @@ int main()
         switch(option)
         {
             case 1:
-                start=create_list(start);
+                last=create_list(last);
                 break;
             
             case 2:
-                display(start);
+                display(last);
                 break;
 
             case 3:
-                cout<<"Number of elements="<<count(start)<<endl;
+                cout<<"Number of elements="<<count(last)<<endl;
                 break;
 
             case 4:
                 int ser,pos;
                 cout<<"Enter element to search=";
                 cin>>ser;
-                pos=search(start,ser);
+                pos=search(last,ser);
                 if(pos==-1)
                     cout<<"Not found!!!"<<endl;
                 else
@@ -158,19 +178,19 @@ int main()
             case 5:
                 cout<<"Enter data=";
                 cin>>data;
-                start=insert_empty(start,data);
+                last=insert_empty(last,data);
                 break;
 
             case 6:
                 cout<<"Enter data=";
                 cin>>data;
-                start=insert_beg(start,data);
+                last=insert_beg(last,data);
                 break;
 
             case 7:
                 cout<<"Enter data=";
                 cin>>data;
-                start=insert_end(start,data);
+                last=insert_end(last,data);
                 break;
 
             case 8:
@@ -178,7 +198,7 @@ int main()
                 cin>>data;
                 cout<<"Enter data after which you want to insert=";
                 cin>>n;
-                start=insert_after(start,data,n);
+                last=insert_after(last,data,n);
                 break;
             
             case 9:
@@ -186,7 +206,7 @@ int main()
                 cin>>data;
                 cout<<"Enter data before which you want to insert=";
                 cin>>n;
-                start=insert_before(start,data,n);
+                last=insert_before(last,data,n);
                 break;
             
             case 10:
@@ -194,17 +214,17 @@ int main()
                 cin>>data;
                 cout<<"Enter position=";
                 cin>>n;
-                start=insert_pos(start,data,n);
+                last=insert_pos(last,data,n);
                 break;
             
             case 11:
                 cout<<"Enter element to be deleted=";
                 cin>>data;
-                start=delete_node(start,data);
+                last=delete_node(last,data);
                 break;
             
             case 12:
-                start=reverse(start);
+                last=reverse(last);
                 break;
             
             case 13:
