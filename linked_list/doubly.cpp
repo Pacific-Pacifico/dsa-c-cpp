@@ -274,6 +274,25 @@ node *delete_node(node *start,int data)
 
 node *reverse(node *start)
 {
+    node *p1,*p2;
+    if(start==NULL)
+    {
+        cout<<"Empty list!!!"<<endl;
+        return start;
+    }
+    p1=start;
+    p2=p1->next;
+    p1->prev=p2;
+    p1->next=NULL;
+    while(p2!=NULL)
+    {
+        p2->prev=p2->next;
+        p2->next=p1;
+        p1=p2;
+        p2=p2->prev;
+    }
+    start=p1;
+    cout<<"List reversed!!!"<<endl;
     return start;
 }
 
