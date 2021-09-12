@@ -104,11 +104,56 @@ node *create_list(node *last)
 
 node *insert_after(node *last,int data,int n)
 {
+    node *p,*temp;
+    p=last->next;
+    do
+    {
+        if(p->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p->next;
+            p->next=temp;
+            if(p==last)
+                last=temp;
+            return last;
+        }
+        p=p->next;
+    } while (p!=last->next);
+    cout<<n<<" not found in the list"<<endl;
     return last;
 }
 
 node *insert_before(node *last,int data,int n)
-{    
+{
+    node *p,*temp;
+    if(last==NULL)
+    {
+        cout<<"Empty list!!!"<<endl;
+        return last;
+    }
+    if(last->next->info==n)
+    {
+        temp=new node;
+        temp->info=data;
+        temp->next=last->next;
+        last->next=temp;
+        return last;
+    }
+    p=last->next;
+    do
+    {
+        if(p->next->info==n)
+        {
+            temp=new node;
+            temp->info=data;
+            temp->next=p->next;
+            p->next=temp;
+            return last;
+        }
+        p=p->next;
+    } while (p->next!=last->next);
+    cout<<n<<" not found in the list"<<endl;
     return last;
 }
 
@@ -119,6 +164,47 @@ node *insert_pos(node *last,int data,int pos)
 
 node *delete_node(node *last,int data)
 {
+    node *temp,*p;
+    if(last==NULL)
+    {
+        cout<<"Empty list!!!"<<endl;
+        return last;
+    }
+    if(last->next==last && last->info==data)
+    {
+        temp=last;
+        last=NULL;
+        delete temp;
+        return last;
+    }
+    if(last->next->info==data)
+    {
+        temp=last->next;
+        last->next=temp->next;
+        delete temp;
+        return last;
+    }
+    p=last->next;
+    while(p->next!=last)
+    {
+        if(p->next->info==data)
+        {
+            temp=p->next;
+            p->next=temp->next;
+            delete temp;
+            return last;
+        }
+        p=p->next;
+    }
+    if(last->info==data)
+    {
+        temp=last;
+        p->next=last->next;
+        last=p;
+        delete temp;
+        return last;
+    }
+    cout<<data<<" not found in the list."<<endl;
     return last;
 }
 
