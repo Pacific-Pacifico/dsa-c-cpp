@@ -68,12 +68,15 @@ void display()
     cout<<endl;
 }
 
+void clear();
+
 int main()
 {
     int option,n;
     char ch;
     do
     {
+        clear();
         cout<<"Select the required option"<<endl;
         cout<<"1.push an element"<<endl;
         cout<<"2.Pop an element"<<endl;
@@ -112,4 +115,14 @@ int main()
         cin>>ch;
     }while(ch=='y' || ch=='Y');
     return 0;
+}
+
+void clear()
+{
+    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+    system("clear");
+    #endif
+    #if defined(_WIN32) || defined(_WIN64)
+    system("cls");
+    #endif
 }

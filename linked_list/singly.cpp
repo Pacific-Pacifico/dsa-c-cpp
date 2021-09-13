@@ -224,6 +224,8 @@ node *reverse(node *start)
     return start;
 }
 
+void clear();
+
 int main()
 {
     node *start=NULL;
@@ -231,6 +233,7 @@ int main()
     char ch;
     do
     {
+        clear();
         cout<<"Singly linked list"<<endl;
         cout<<"1.create a list"<<endl;
         cout<<"2.display"<<endl;
@@ -327,4 +330,14 @@ int main()
         cin>>ch;
     }while(ch=='y' || ch=='Y');
     return 0;
+}
+
+void clear()
+{
+    #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
+    system("clear");
+    #endif
+    #if defined(_WIN32) || defined(_WIN64)
+    system("cls");
+    #endif
 }
