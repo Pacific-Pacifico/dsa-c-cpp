@@ -1,5 +1,4 @@
 #include<iostream>
-#define MAX 5
 using namespace std;
 
 struct node 

@@ -1,74 +1,60 @@
+// Priority queue implemented using sorted linked list
+// lesser the priority number, higher its priority 
 #include<iostream>
 using namespace std;
 
-struct node 
+struct node
 {
+    int priority;
     int info;
     node *next;
-}*rear=NULL;
+}*front=NULL;
 
 int isEmpty()
 {
-    if(rear==NULL)
+    if(front==NULL)
         return 1;
     return 0;
 }
 
-void enqueue(int data)
+void insert(int data,int priority)
 {
-    struct node *temp;
+    node *temp,*p;
     temp=new node;
     if(temp==NULL)
     {
-        cout<<"Not enough memory"<<endl;
+        cout<<"Not enough memory!!!"<<endl;
         return;
     }
     temp->info=data;
-    if(isEmpty())
+    temp->priority=priority;
+    if(isEmpty() || front->priority > priority)
     {
-        rear=temp;
-        temp->next=rear;
+        temp->next=front;
+        front=temp;
+        return;
     }
-    else
-    {
-        temp->next=rear->next;
-        rear->next=temp;
-        rear=temp;
-    }
+    p=front;
+    while(p->next!=NULL && p->next->priority <= priority)
+        p=p->next;
+    temp->next=p->next;
+    p->next=temp;
 }
 
-void dequeue()
+void delete_front()
 {
-    node *temp;
+    struct node *temp;
     int data;
     if(isEmpty())
     {
-        cout<<"queue underflow!!!"<<endl;
+        cout<<"Queue underflow!!!"<<endl;
         return;
     }
-    if(rear->next==rear)
-    {
-        temp=rear;        
-        rear=NULL;
-    }
-    else
-    {
-        temp=rear->next;
-        rear->next=temp->next;
-    }
+    temp=front;
     data=temp->info;
+    front=front->next;
     delete temp;
-    cout<<"removed element= "<<data<<endl;
-}
-
-void peek()
-{
-    if(isEmpty())
-    {
-        cout<<"queue underflow!!!"<<endl;
-        return;
-    }
-    cout<<"Element in front= "<<rear->next->info<<endl;
+    cout<<"Deleted element= "<<data<<endl;
 }
 
 void display()
@@ -76,34 +62,32 @@ void display()
     node *p;
     if(isEmpty())
     {
-        cout<<"queue empty!!!"<<endl;
+        cout<<"queue is empty!!!"<<endl;
         return;
     }
-    cout<<"Queue: ";
-    p=rear->next;
-    do
+    cout<<"Queue: "<<endl;
+    p=front;
+    while(p!=NULL)
     {
-        cout<<p->info<<" ";
+        cout<<"Priority= "<<p->priority<<"  "<<"Element= "<<p->info<<endl;
         p=p->next;
-    } while (p!=rear->next);
-    cout<<endl;
+    }
 }
 
 void clear();
 
 int main()
 {
-    int option,n;
+    int option,n,p;
     char ch;
     do
     {
         clear();
         cout<<"Select the required option"<<endl;
-        cout<<"1.enqueue an element"<<endl;
-        cout<<"2.dequeue an element"<<endl;
-        cout<<"3.peek(display the element at the front)"<<endl;
-        cout<<"4.display all elements"<<endl;
-        cout<<"5.Exit"<<endl;
+        cout<<"1.insert an element"<<endl;
+        cout<<"2.delete an element"<<endl;
+        cout<<"3.display all elements"<<endl;
+        cout<<"4.Exit"<<endl;
         cout<<"Enter the option="<<endl;
         cin>>option;
         switch(option)
@@ -111,22 +95,20 @@ int main()
             case 1:
                 cout<<"Enter element=";
                 cin>>n;
-                enqueue(n);
+                cout<<"Enter priority=";
+                cin>>p;
+                insert(n,p);
                 break;
 
             case 2:
-                dequeue();
+                delete_front();
                 break;
-            
+                    
             case 3:
-                peek();
-                break;
-            
-            case 4:
                 display();
                 break;
             
-            case 5:
+            case 4:
                 exit(1);
 
             default:
