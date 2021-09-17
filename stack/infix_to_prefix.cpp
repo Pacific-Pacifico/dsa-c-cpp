@@ -4,7 +4,8 @@
 #define MAX 50
 using namespace std;
 
-char infix[MAX],prefix[MAX],stack[MAX];
+char infix[MAX],prefix[MAX];
+long stack[MAX];
 int top=-1;
 
 int isWhitespace(char ch)
@@ -21,7 +22,7 @@ int isEmpty()
     return 0;
 }
 
-void push(char ch)
+void push(long ch)
 {
     if(top==MAX-1)
     {
@@ -31,7 +32,7 @@ void push(char ch)
     stack[++top]=ch;
 }
 
-int pop()
+long pop()
 {
     if(isEmpty())
     {
@@ -53,7 +54,7 @@ int inStackPriority(char ch)
         case '%':
             return 2;
         case '^':
-            return 3;
+            return 4;
     }
     return 0;
 }
@@ -70,7 +71,7 @@ int incomingPriority(char ch)
         case '%':
             return 2;
         case '^':
-            return 4;
+            return 3;
     }
     return 0;
 }
