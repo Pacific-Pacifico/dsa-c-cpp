@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string.h>
+#include<math.h>
 #define MAX 50
 using namespace std;
 
@@ -114,6 +115,52 @@ void infixToPostfix()
     postfix[p]='\0';
 }
 
+int evaluatePostfix()
+{
+    int i,op1,op2,result;
+    char ch;
+    for(i=0;i<strlen(postfix);i++)
+    {
+        ch=postfix[i];
+        if(ch>='0' && ch<='9')
+            push(ch-'0');
+        else
+        {
+            op2=pop();
+            op1=pop();
+            switch(ch)
+            {
+                case '+':
+                    result=op1+op2;
+                    break;
+                
+                case '-':
+                    result=op1-op2;
+                    break;
+                
+                case '*':
+                    result=op1*op2;
+                    break;
+                
+                case '/':
+                    result=op1/op2;
+                    break;
+                
+                case '%':
+                    result=op1%op2;
+                    break;
+                
+                case '^':
+                    result=pow(op1,op2);
+                    break;
+            }
+            push(result);
+        }
+    }
+    result=pop();
+    return result;
+}
+
 int main()
 {
     int i,p=0;
@@ -125,5 +172,6 @@ int main()
     infixToPostfix();
     cout<<"Postfix expression:";
     puts(postfix);
+    cout<<"Value of postfix expression="<<evaluatePostfix()<<endl;
     return 0;
 }
