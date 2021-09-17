@@ -4,8 +4,7 @@
 #define MAX 50
 using namespace std;
 
-char infix[MAX],postfix[MAX];
-long stack[MAX];
+char infix[MAX],prefix[MAX],stack[MAX];
 int top=-1;
 
 int isWhitespace(char ch)
@@ -22,7 +21,7 @@ int isEmpty()
     return 0;
 }
 
-void push(long ch)
+void push(char ch)
 {
     if(top==MAX-1)
     {
@@ -32,7 +31,7 @@ void push(long ch)
     stack[++top]=ch;
 }
 
-long pop()
+int pop()
 {
     if(isEmpty())
     {
@@ -76,7 +75,35 @@ int incomingPriority(char ch)
     return 0;
 }
 
-void infixToPostfix()
+void reverseInfix(char exp[])
+{
+    int i;
+    char ch;
+    for(i=0;i<strlen(exp);i++)
+    {
+        ch=exp[i];
+        if(ch=='(')
+            push(')');
+        else if(ch==')')
+            push('(');
+        else
+            push(ch);
+    }
+    for(i=0;i<strlen(exp);i++)
+        exp[i]=pop();
+}
+
+void reverse(char exp[])
+{
+    int i;
+    char ch;
+    for(i=0;i<strlen(exp);i++)
+            push(exp[i]);
+    for(i=0;i<strlen(exp);i++)
+        exp[i]=pop();
+}
+
+void infixToPrefix()
 {
     int i,p=0;
     char ch,next;
@@ -93,7 +120,7 @@ void infixToPostfix()
 
             case ')':
                 while((next=pop())!='(') 
-                    postfix[p++]=next;
+                    prefix[p++]=next;
                 break;
             
             case '^':
@@ -102,34 +129,34 @@ void infixToPostfix()
             case '%':
             case '+':
             case '-':
-                while(!isEmpty() && incomingPriority(ch) <= inStackPriority(stack[top]))
-                    postfix[p++]=pop();
+                while(!isEmpty() && incomingPriority(ch) < inStackPriority(stack[top]))
+                    prefix[p++]=pop();
                 push(ch);
                 break;
             
             default:
-                postfix[p++]=ch;
+                prefix[p++]=ch;
         }
     }
     while(!isEmpty())
-        postfix[p++]=pop();
-    postfix[p]='\0';
+        prefix[p++]=pop();
+    prefix[p]='\0';
 }
 
-long evaluatePostfix()
+int evaluatePrefix()
 {
     int i;
     long op1,op2,result;
     char ch;
-    for(i=0;i<strlen(postfix);i++)
+    for(i=0;i<strlen(prefix);i++)
     {
-        ch=postfix[i];
+        ch=prefix[i];
         if(ch>='0' && ch<='9')
             push(ch-'0');
         else
         {
-            op2=pop();
             op1=pop();
+            op2=pop();
             switch(ch)
             {
                 case '+':
@@ -171,9 +198,14 @@ int main()
     fgets(infix,MAX,stdin);
     cout<<"Infix expression:";
     puts(infix);
-    infixToPostfix();
-    cout<<"Postfix expression:";
-    puts(postfix);
-    cout<<"Value of postfix expression="<<evaluatePostfix()<<endl;
+    cout<<"Reversed infix expression=";
+    reverseInfix(infix);
+    puts(infix);
+    infixToPrefix();
+    reverse(prefix);
+    cout<<"Prefix expression:";
+    puts(prefix);
+    reverse(prefix);
+    cout<<"Value of prefix expression="<<evaluatePrefix()<<endl;
     return 0;
 }
