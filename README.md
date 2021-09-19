@@ -5,3 +5,4 @@
 ## 3.remove the line using namespace std 
 ## 4.add clrscr(); as first line in main()
 ## 5.add getch(); at last before return 0; line in main()
+## 6.if there is function named clear() ,remove its definition,declaration and function call
