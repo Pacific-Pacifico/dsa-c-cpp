@@ -16,7 +16,7 @@ int isEmpty()
 
 void enqueue(int data)
 {
-    node*temp;
+    node *temp;
     temp=new node;
     if(temp==NULL)
     {

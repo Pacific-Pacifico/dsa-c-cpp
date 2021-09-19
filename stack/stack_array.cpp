@@ -57,7 +57,7 @@ void display()
 {
     if(isEmpty())
     {
-        cout<<"stack underflow"<<endl;
+        cout<<"stack is empty"<<endl;
         return;
     }
     cout<<"Stack: "<<endl;

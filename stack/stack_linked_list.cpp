@@ -60,7 +60,7 @@ void display()
     node *p;
     if(isEmpty())
     {
-        cout<<"stack underflow"<<endl;
+        cout<<"stack is empty"<<endl;
         return;
     }
     cout<<"\nStack: ";
