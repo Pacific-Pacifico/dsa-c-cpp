@@ -3,14 +3,6 @@
 #include<iostream>
 using namespace std;
 
-void swap(int &a,int &b)
-{
-    int temp;
-    temp=a;
-    a=b;
-    b=temp;
-}
-
 void merge(int arr[],int lb,int mid,int ub)
 {
     int i,j,k,a[ub+1];
@@ -62,14 +54,6 @@ void merge_sort(int arr[],int lb,int ub)
         merge_sort(arr,mid+1,ub);
         merge(arr,lb,mid,ub);
     }
-}
-
-void swap(int &a,int &b)
-{
-    int temp;
-    temp=a;
-    a=b;
-    b=temp;
 }
 
 void show(int arr[],int n)
