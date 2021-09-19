@@ -19,6 +19,7 @@ int main()
 {
     int i,n;
     clrscr();
+    cout<<"Prime numbers series upto 100: ";
     for(i=2;i<=100;i++)
     {
         if(isPrime(i))
